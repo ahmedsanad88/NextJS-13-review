@@ -1,36 +1,90 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# NextJS 13 🎉
 
-## Getting Started
+> NextJS is a popular open source framework for building server-side rendering react app.
+> [nextJS](https://nextjs.org)
 
-First, run the development server:
+## Why?
+
+- SSR: NextJS enables server-side rendering of web-pages, which can improve the website performance and UX by pre-rendering pages and sending full formed HTML to the browser.
+- Automatic code splitting: NextJS Auto. splits code into smaller chunks, make it easier to load and reducing the time taken for website load.
+- SEO Optimization: Since NextJS support SSR, it can help with Search engine to crawl and index the page easily.
+- Faster Development: NextJS includes many features that makes the dev. process much easier such as file based routing, API routing and code splitting.
+- Great developer experience: With all of these benefits NextJS makes the developer experience so simple and productive.
+- Built in support for Typescript: It's helps to have more robust code and easily finds bugs.
+- Scalability: NextJS is built to handle large-scale app, with features such as automatic code splitting, caching, and support for serverless functions.
+
+## Pre-rendering:
+
+> By default NextJS pre-renders every page. Which mean generate HTML for the page in advance instead of having all done on the user browser.
+> Hydration --> is the process happened when NextJS sending pre-rendered HTML with the minimal JS file for that page only and when page load the js file run and makes the page fully interactive.
+> Two forms of Pre-rendering:
+>
+> > Static side generation --> where The HTML generated at build time.
+> > server-side generation --> where The HTML generated on each request.
+
+## Create Next App and Folder Structure:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+
+npx create-next-app@latest {your app name or ./ if you want current directory}
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+> Then you should prompt by some questions about your project required tools like typescript, using the new ./app directory and so on.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Files and Folders:
+  > You are going to find some config files belong to Next, Typescript, Tailwind(if used), and Postcss(if used).
+  > eslintrc --> if you want to update or add any rules for linting.
+  > gitignore and package.json are familiar to us.
+  > Public folder --> where you can use and put all static resources like images and icons
+  > App folder --> This is the juicy part of nextJS where all of the routing, layout and api created for our project.
 
-[http://localhost:3000/api/hello](http://localhost:3000/api/hello) is an endpoint that uses [Route Handlers](https://beta.nextjs.org/docs/routing/route-handlers). This endpoint can be edited in `app/api/hello/route.ts`.
+## NextJS explain
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+1. Basic Routing
 
-## Learn More
+   > By create any folder/directory inside app --> you create an route to it but must include page.jsx / page.tsx to be served as the required page. such as about page.
 
-To learn more about Next.js, take a look at the following resources:
+2. Layout --> General
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+   > Layout is like general that is going to apply on all pages of our application and even further we can add static components to it to avoid repeating your code.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+3. Layout --> Specific
 
-## Deploy on Vercel
+   > By creating a layout.tsx/layout.jsx file we can add a specific layout for any files and sub folders, files or nesting. ---> about
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+4. Module Styles:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+   > If you are using the module styles then you need to take care of that when import style module inside page or layout then all nested children will have an access on that module that could cause an error with styles with the same class name so make sure from that point
+
+5. SEO and Metadata:
+
+> In the new version of nextJS starting from 13.2 there are a new approach to deal with metadata using the following syntax:
+
+```ts
+import type { Metadata } from "next";
+export const metadata: Metadata = {
+  title: "Create Next App",
+  description: "Generated by create next app",
+};
+```
+
+> Before we used to create an head component and inject it into the page directly.
+> Like below example.
+
+```js
+export default function Head() {
+  return (
+    <>
+      <title>About Page</title>
+      <meta content="width=device-width, initial-scale=1" name="viewport" />
+      <meta name="description" content="Created by Dave" />
+      <link rel="icon" href="/favicon.ico" />
+    </>
+  );
+}
+```
+
+6. Loading State:
+
+>
